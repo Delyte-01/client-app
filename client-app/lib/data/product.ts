@@ -102,7 +102,6 @@ export const products: ProductProps[] = [
     name: "Touch perfume oil",
     category: "perfume",
     price: "1300",
-
     rating: 4.5,
     reviews: 203,
     image:
@@ -189,6 +188,150 @@ export const products: ProductProps[] = [
     reviews: 203,
     image:
       "https://res.cloudinary.com/dk5mfu099/image/upload/v1751373257/WhatsApp_Image_2025-07-01_at_1.32.22_PM_tn9mkl.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 16,
+    name: "Riggs perfume",
+    category: "perfume",
+    price: "3,500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474612/WhatsApp_Image_2025-07-10_at_10.59.42_PM_ehxu2s.jpg",
+    badge: "Hot",
+  },
+  {
+    
+    id: 17,
+    name: "Riggs perfume",
+    category: "perfume",
+    price: "3,500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474611/WhatsApp_Image_2024-09-15_at.30.25_PM_qapeye.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 18,
+    name: "Riggs perfume",
+    category: "perfume",
+    price: "3,500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474605/riggs_dky3qe.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 19,
+    name: "vanilla crush",
+    category: "perfume",
+    price: "2,500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474604/img12_tjsog0.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 20,
+    name: "Deal",
+    category: "perfume",
+    price: "5,500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474600/img10_gwnagb.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 21,
+    name: "monlogo pococo",
+    category: "perfume",
+    price: "4000",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474597/img9_y45zsv.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 22,
+    name: "Nivea roll on",
+    category: "perfume",
+    price: "2300",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474597/img8_czv19n.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 23,
+    name: "perfume",
+    category: "perfume",
+    price: "3500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474596/img7_nbxq4x.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 24,
+    name: "hug perfume",
+    category: "perfume",
+    price: "4000",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474592/img6_fo25gc.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 25,
+    name: "Boss perfume",
+    category: "perfume",
+    price: "2500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474589/img2_es0fpm.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 26,
+    name: "Roll on",
+    category: "Roll on",
+    price: "1300",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474589/img1_djg8lf.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 27,
+    name: "Darling big ",
+    category: "Hair",
+    price: "6800",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474590/img5_bwez7x.jpg",
+    badge: "Hot",
+  },
+  {
+    id: 28,
+    name: "Ruwa exppression ",
+    category: "Hair",
+    price: "3500",
+    rating: 4.5,
+    reviews: 203,
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1752474590/img5_bwez7x.jpg",
     badge: "Hot",
   },
 ];

@@ -1,0 +1,167 @@
+"use client";
+
+import { useRef, useState } from "react";
+
+export default function AdminUpload()
+{
+const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    price: "",
+  });
+
+  const [image, setImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setImage(file);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!image) {
+      setMessage("❌ Please select an image");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Step 1: Upload image to Cloudinary
+      const body = new FormData();
+      body.append("file", image);
+      body.append("upload_preset", "product_upload");
+
+      const cloudinaryRes = await fetch(
+        "https://api.cloudinary.com/v1_1/dk5mfu099/image/upload",
+        { method: "POST", body }
+      );
+      const cloudData = await cloudinaryRes.json();
+
+      if (!cloudinaryRes.ok || !cloudData.secure_url) {
+        throw new Error(cloudData.error?.message || "Image upload failed");
+      }
+
+      // Step 2: Submit product to backend
+      const payload = {
+        ...formData,
+        imageUrl: cloudData.secure_url,
+      };
+
+        const res = await fetch(
+            "https://script.google.com/macros/s/AKfycbza8o0umvY6LA24cTI7N-080CxVg43BTAATsn1g60XFRTSVjRIsoeIrZZVGCWAgEn50/exec",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: formData.name,
+                    description: formData.description,
+                    price: formData.price,
+                    imageUrl: cloudData.secure_url,
+                }),
+            }
+    
+        );
+        
+
+      if (!res.ok) {
+        const errorText = await res.text(); // get raw HTML/text if it's not JSON
+        throw new Error(`Failed to upload: ${errorText}`);
+      }
+      const result = await res.json();
+
+      // Success
+      setMessage("✅ Product uploaded successfully!");
+      setFormData({ name: "", description: "", price: "" });
+      setImage(null);
+      if (fileInputRef.current) fileInputRef.current.value = ""; // reset file input
+    } catch (err: any) {
+      setMessage(`❌ ${err.message || "Upload failed"}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-xl mx-auto p-6 border rounded-lg shadow-md bg-white dark:bg-[#0c0c0c] text-black dark:text-white">
+      <h2 className="text-2xl font-bold mb-4">Upload Product</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          name="name"
+          placeholder="Product Name"
+          value={formData.name}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded dark:bg-neutral-900 dark:border-neutral-700"
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={formData.description}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded dark:bg-neutral-900 dark:border-neutral-700"
+          rows={4}
+          required
+        />
+        <input
+          name="price"
+          placeholder="Price"
+          type="number"
+          value={formData.price}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded dark:bg-neutral-900 dark:border-neutral-700"
+          required
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="w-full px-4 py-2 border rounded dark:bg-neutral-900 dark:border-neutral-700"
+          required
+          ref={fileInputRef}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full text-white px-4 py-2 rounded transition ${
+            loading ? "bg-gray-600" : "bg-black hover:bg-gray-800"
+          }`}
+        >
+          {loading ? "Uploading..." : "Submit Product"}
+        </button>
+        {message && (
+          <p
+            className={`text-sm mt-2 ${
+              message.includes("✅") ? "text-green-500" : "text-red-400"
+            }`}
+          >
+            {message}
+          </p>
+        )}
+        <div>
+          {image && (
+            <img
+              src={URL.createObjectURL(image)}
+              alt="Preview"
+              className="w-full h-auto max-h-64 object-cover rounded shadow"
+            />
+          )}
+        </div>
+      </form>
+    </div>
+  );
+}
